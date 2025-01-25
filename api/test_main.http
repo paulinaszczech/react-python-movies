@@ -22,3 +22,37 @@ Accept: application/json
 
 DELETE http://127.0.0.1:8000/movies/5
 Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/actors
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/actors/3
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/actors
+Accept: application/json
+
+{
+  "name": "Nowyx ",
+  "surname": "Nowyx"
+}
+
+###
+
+DELETE http://127.0.0.1:8000/actors/9
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/movies/5/actors
+Accept: application/json
+
+{
+  "actor_id": 3
+}
