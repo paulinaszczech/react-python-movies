@@ -27,7 +27,8 @@ function App() {
           headers: { 'Content-Type': 'application/json' }
         });
         if (response.ok) {
-          setMovies([...movies, movie]);
+          const movieFromServer = await response.json();
+          setMovies([...movies, movieFromServer]);
           setAddingMovie(false);
         }
       }
