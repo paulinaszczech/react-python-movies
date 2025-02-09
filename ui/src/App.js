@@ -14,17 +14,18 @@ function App() {
     useEffect(()=> {
       const fetchMovies = async () => {
         const response = await fetch (`/movies`);
+        
         if (response.ok) {
           const movies = await response.json();
           setMovies(movies);
+          console.log(movies);
         }
+
       };
       fetchMovies();
     }, []);
 
     async function handleAddMovie(movie) {
-        console.log('sfgfdgdfg');
-        console.log(movie);
         const response = await fetch('/movies', {
           method: 'POST',
           body: JSON.stringify(movie),

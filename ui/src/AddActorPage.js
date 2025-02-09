@@ -16,10 +16,8 @@ export default function AddActorPage() {
             if (!actorResponse.ok) {
                 throw new Error('Błąd podczas dodawania aktora');
             }
-            console.log('dupa1')
             // Pobieramy dane dodanego aktora, aby uzyskać jego ID
             const newActor = await actorResponse.json();
-            console.log(newActor)
             
             // Teraz przypisujemy aktora do filmu
             const addActorToMovieResponse = await fetch(`/movies/${movieId}/actors`, {
@@ -27,11 +25,7 @@ export default function AddActorPage() {
                 body: JSON.stringify({ actor_id: newActor.id }),
                 headers: { 'Content-Type': 'application/json' }
             });
-            console.log('dupa2')
-            console.log(movieId)
-            console.log(`/movies/${movieId}/actors`)
-            
-            console.log(addActorToMovieResponse)
+
             if (!addActorToMovieResponse.ok) {
                 throw new Error('Błąd podczas przypisywania aktora do filmu');
             }

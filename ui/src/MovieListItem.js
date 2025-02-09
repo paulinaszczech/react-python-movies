@@ -5,21 +5,34 @@ export default function MovieListItem(props) {
 
     const handleAddActorClick = () => {
         navigate(`/add-actor/${props.movie.id}`);
+
     };
     return (
         <div>
             <div>
+                
                 <strong>{props.movie.title}</strong>
                 {' '}
                 <span>({props.movie.year})</span>
                 {' '}
                 directed by {props.movie.director}
                 {' '}
-                <a onClick={props.onDelete}>Delete</a>
+                <a onClick={props.onDelete}>Delete move</a>
                 {' '}
-                <a onClick={handleAddActorClick}>Actor</a>
+                <a onClick={handleAddActorClick}>Add actor</a>
+                
             </div>
-            {props.movie.description}
+            <div>
+                actors: {props.movie.actors && props.movie.actors.length > 0 ? 
+                props.movie.actors.map(actor => `${actor.name} ${actor.surname}`).join(", ") : 
+                "brak danych"}
+            </div>
+            <div>
+                {props.movie.description}
+            </div>
+
+
+            
         </div>
     );
 }
