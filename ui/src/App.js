@@ -1,10 +1,11 @@
-import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import './App.css';
 import {useEffect, useState} from "react";
 import "milligram";
 import MovieForm from "./MovieForm";
 import MoviesList from "./MoviesList";
 import AddActorPage from "./AddActorPage";
+import ActorsList from "./ActorsList";
 
 function App() {
     const [movies, setMovies] = useState([]);
@@ -37,7 +38,7 @@ function App() {
           setAddingMovie(false);
         }
       }
-  
+
 
     async function handleDeleteMovie(movie) {
         const response = await fetch(`/movies/${movie.id}`,{
@@ -48,6 +49,10 @@ function App() {
           setMovies(filteredMovies);
         }
     }
+
+    const handleShowActors = () => {
+      window.open('/add-actor', '_blank');
+    };
 
        return (
         <Router>
@@ -64,11 +69,16 @@ function App() {
                             ? <MovieForm onMovieSubmit={handleAddMovie}
                                          buttonLabel="Add a movie"
                             />
-                            : <button onClick={() => setAddingMovie(true)}>Add a movie</button>}
+                            : <button className="button" onClick={() => setAddingMovie(true)}>Add a movie</button>}
+                            
+                        <div className="button-container">
+                        <Link to="/actors" className="button">Display an actors</Link>
+                        </div>
                             
                     </div>
                 } />
                 <Route path="/add-actor/:movieId" element={<AddActorPage />} />
+                <Route path="/actors" element={<ActorsList />} />
                 {/* inne trasy... */}
             </Routes>
         </Router>
@@ -76,3 +86,5 @@ function App() {
 }
 
 export default App;
+
+
