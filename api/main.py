@@ -46,7 +46,7 @@ def delete_movie(movie_id: int):
 
 
 # Endpoint to get all actors 
-@app.get("/actors/", response_model=List[schemas.Actor])
+@app.get("/actors", response_model=List[schemas.Actor])
 def get_actors():
     """
     Retrieve all actors from the database.
@@ -69,7 +69,7 @@ def get_actor(actor_id: int):
 
 
 # Endpoint to add a new actor to the database
-@app.post("/actors/", response_model=schemas.Actor)
+@app.post("/actors", response_model=schemas.Actor)
 def add_actor(actor: schemas.ActorCreate):
     """
     Add a new actor to the database.
