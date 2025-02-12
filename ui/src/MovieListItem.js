@@ -17,9 +17,13 @@ export default function MovieListItem(props) {
                 {' '}
                 directed by {props.movie.director}
                 {' '}
-                <a onClick={props.onDelete}>Delete move</a>
+                <a 
+                    className="delete-link"
+                    onClick={props.onDelete}>Delete movie</a>
                 {' '}
-                <a onClick={handleAddActorClick}>Add actor</a>
+                <a 
+                    className="add-actor-link"
+                    onClick={handleAddActorClick}>Add actor</a>
                 
             </div>
             <div>

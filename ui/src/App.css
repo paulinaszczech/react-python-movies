@@ -24,6 +24,33 @@
   color: white;
 }
 
+.delete-link {
+    color: #e74c3c; 
+    text-decoration: none; 
+    font-size: 1.1rem;
+    font-weight: bold; 
+    transition: transform 0.3s ease, color 0.3s ease; 
+    margin-left: 5px;
+} 
+
+.delete-link:hover {
+    transform: scale(1.1); 
+    color: #8e1c29; 
+}
+
+.add-actor-link {
+  color: #8e44ad ; 
+  text-decoration: none; 
+  font-size: 1.1rem;
+  font-weight: bold; 
+  transition: transform 0.3s ease, color 0.3s ease; 
+}
+
+.add-actor-link:hover {
+  transform: scale(1.1); 
+  color: #3498db ; 
+}
+
 .App-link {
   color: #61dafb;
 }

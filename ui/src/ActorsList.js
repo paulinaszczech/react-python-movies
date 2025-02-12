@@ -39,7 +39,7 @@ function ActorsList({onDeleteActor}) {
               {actor.name}  {actor.surname}
               <span 
                 onClick={() => handleDeleteClick(actor.id)} 
-                style={{color: 'red', cursor: 'pointer', marginLeft: '10px'}}>
+                className="delete-link">
                 Delete
               </span>
             </li>
