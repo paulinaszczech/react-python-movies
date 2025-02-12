@@ -115,3 +115,19 @@ def add_actor_to_movie(movie_id: int, actor_data: ActorToMovie):
 
     movie.actors.add(actor)
     return movie
+
+
+# Endpoint to remove an actor from  movies 
+@app.delete("/actors/{actor_id}/movies", response_model=schemas.Actor)
+def remove_actor_from_all_movies(actor_id: int):
+    """
+    Remove an actor from all movies.
+    """
+    actor = models.Actor.get_or_none(models.Actor.id == actor_id)
+    if actor is None:
+        raise HTTPException(status_code=404, detail="Actor not found")
+
+    for movie in actor.movies:
+        movie.actors.remove(actor)
+
+    return actor

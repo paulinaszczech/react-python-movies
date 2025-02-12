@@ -13,9 +13,6 @@ export default function ActorForm(props) {
             return alert('Nazwisko jest za krótkie');
         }
         try {
-            console.log('aaaaa');
-            console.log(name);
-            console.log(surname);
             const response = await fetch('/actors', {
                 method: 'POST',
                 body: JSON.stringify({name, surname}),
@@ -45,7 +42,7 @@ export default function ActorForm(props) {
                 <label>Surname</label>
                 <input type="text" value={surname} onChange={(event) => setSurname(event.target.value)}/>
             </div>
-            <button type="submit">Add Actor</button>
+            <button className="button" type="submit">Add Actor</button>
         </form>
     );
 }

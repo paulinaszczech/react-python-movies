@@ -11,18 +11,15 @@ function App() {
     const [movies, setMovies] = useState([]);
     const [addingMovie, setAddingMovie] = useState(false);
 
-
-    useEffect(()=> {
-      const fetchMovies = async () => {
-        const response = await fetch (`/movies`);
-        
-        if (response.ok) {
+    const fetchMovies = async () => {
+      const response = await fetch(`/movies`);
+      if (response.ok) {
           const movies = await response.json();
           setMovies(movies);
-          console.log(movies);
-        }
+      }
+  };
 
-      };
+    useEffect(()=> {
       fetchMovies();
     }, []);
 
@@ -54,6 +51,32 @@ function App() {
       window.open('/add-actor', '_blank');
     };
 
+    async function handleRemoveActorFromMovies(actorId) {
+      const response = await fetch(`/actors/${actorId}/movies`, {
+          method: 'DELETE',
+      });
+      if (!response.ok) {
+          throw new Error('Failed to remove actor from movies');
+      }
+  }
+  
+
+  async function handleDeleteActor(actorId) {
+    try {
+        await handleRemoveActorFromMovies(actorId);
+        const response = await fetch(`/actors/${actorId}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            alert("Actor deleted successfully");
+        }
+    } catch (error) {
+        console.error(error);
+        alert('Failed to delete actor');
+    }
+}
+
+
        return (
         <Router>
             <Routes>
@@ -77,8 +100,8 @@ function App() {
                             
                     </div>
                 } />
-                <Route path="/add-actor/:movieId" element={<AddActorPage />} />
-                <Route path="/actors" element={<ActorsList />} />
+                <Route path="/add-actor/:movieId" element={<AddActorPage fetchMovies={fetchMovies} />} />
+                <Route path="/actors" element={<ActorsList onDeleteActor={handleDeleteActor} />} />
                 {/* inne trasy... */}
             </Routes>
         </Router>
