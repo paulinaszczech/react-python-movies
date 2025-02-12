@@ -111,9 +111,11 @@ def add_actor_to_movie(movie_id: int, actor_data: ActorToMovie):
         raise HTTPException(status_code=404, detail="Actor not found")
 
     if actor in movie.actors:
+        print("Actor already assigned to this movie:", actor)
         raise HTTPException(status_code=409, detail="Actor already assigned to this movie")
 
     movie.actors.add(actor)
+    print("Actor assigned to movie:", actor)
     return movie
 
 
