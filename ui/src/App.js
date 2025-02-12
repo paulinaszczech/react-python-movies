@@ -90,9 +90,9 @@ function App() {
                             />}
                         {addingMovie
                             ? <MovieForm onMovieSubmit={handleAddMovie}
-                                         buttonLabel="Add a movie"
+                                         buttonLabel="Add a movie1"
                             />
-                            : <button className="button" onClick={() => setAddingMovie(true)}>Add a movie</button>}
+                            : <button className="button" onClick={() => setAddingMovie(true)}>Add a movie2</button>}
                             
                         <div className="button-container">
                         <Link to="/actors" className="button">Display an actors</Link>
