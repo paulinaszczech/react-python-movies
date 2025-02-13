@@ -69,13 +69,13 @@ function App() {
         });
         if (response.ok) {
             alert("Actor deleted successfully");
+            fetchMovies();
         }
     } catch (error) {
         console.error(error);
         alert('Failed to delete actor');
     }
 }
-
 
        return (
         <Router>
@@ -90,9 +90,8 @@ function App() {
                             />}
                         {addingMovie
                             ? <MovieForm onMovieSubmit={handleAddMovie}
-                                         buttonLabel="Add a movie1"
-                            />
-                            : <button className="button" onClick={() => setAddingMovie(true)}>Add a movie2</button>}
+                                         buttonLabel="Add a movie"/>
+                            : <button className="button" onClick={() => setAddingMovie(true)}>Add a movie</button>}
                             
                         <div className="button-container">
                         <Link to="/actors" className="button">Display an actors</Link>

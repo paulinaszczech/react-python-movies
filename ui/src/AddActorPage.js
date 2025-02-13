@@ -23,7 +23,7 @@ export default function AddActorPage({fetchMovies}) {
                 if (existingActor.length > 0) {
                     console.log("Existing actor found:", existingActor[0]);
                     
-                        // Zmieniamy to na dokładniejsze porównanie, ignorując wielkość liter i białe znaki
+                        // More precise comparison, ignoring case and whitespace.
                         newActor = existingActor.find((existingActor) =>
                             existingActor.name.trim().toLowerCase() === actor.name.trim().toLowerCase() &&
                             existingActor.surname.trim().toLowerCase() === actor.surname.trim().toLowerCase()
@@ -45,13 +45,13 @@ export default function AddActorPage({fetchMovies}) {
                     headers: { 'Content-Type': 'application/json' }
                 });
                 if (!actorResponse.ok) {
-                    throw new Error('Błąd podczas dodawania aktora');
+                    throw new Error('Error while adding the actor');
                 }
                 newActor = await actorResponse.json();
                 console.log("New actor added:", newActor);
             }
 
-            // Sprawdzamy, czy aktor już jest przypisany do filmu
+            // Checking if the actor is already assigned to the movie
             const movieActorsResponse = await fetch(`/movies/${movieId}/actors`);
             if (movieActorsResponse.ok) {
                 const movieActors = await movieActorsResponse.json();
@@ -59,13 +59,12 @@ export default function AddActorPage({fetchMovies}) {
                 const isActorAssigned = movieActors.some((movieActor) => movieActor.id === newActor.id);
  
                 if (isActorAssigned) {
-                    alert('Aktor już jest przypisany do tego filmu');
+                    alert('The actor is already assigned to this movie');
                     setLoading(false);
                     return;
                 }
             }
  
-            // Teraz przypisujemy aktora do filmu
             console.log("Assigning actor to movie:", { actor_id: newActor.id, movie_id: movieId });
 
             // Add actor to movie
@@ -75,17 +74,17 @@ export default function AddActorPage({fetchMovies}) {
                 headers: { 'Content-Type': 'application/json' }
             });
             if (!addActorToMovieResponse.ok) {
-                throw new Error('Błąd podczas przypisywania aktora do filmu');
+                throw new Error('Error while assigning the actor to the movie');
             }
 
-            alert('Aktor dodany i przypisany do filmu pomyślnie');
+            alert('The actor has been successfully added and assigned to the movie');
             fetchMovies();
             navigate("/");
             setLoading(false);
 
         } catch (error) {
             setLoading(false);
-            alert('Błąd sieci: ' + error.message);
+            alert('Network error: ' + error.message);
         }
     
     };
@@ -97,7 +96,7 @@ export default function AddActorPage({fetchMovies}) {
             <button 
                 className="button" 
                 onClick={() => navigate("/")}
-                disabled={isLoading} // Zablokowanie przycisku, gdy jest w trakcie ładowania
+                disabled={isLoading} 
             >
                 {isLoading ? "Loading..." : "Back"} {/* Zmiana tekstu przycisku */}
             </button>

@@ -19,12 +19,14 @@ function ActorsList({onDeleteActor}) {
   }, []);
 
   const handleDeleteClick = (actorId) => {
-    if (onDeleteActor) {
+    if (window.confirm('Are you sure you want to delete this actor?')) {
       onDeleteActor(actorId);
+      navigate('/');
     }
 
-    const updatedActors = actors.filter(actor => actor.id !== actorId);
-    setActors(updatedActors);
+    // const updatedActors = actors.filter(actor => actor.id !== actorId);
+    // setActors(updatedActors);
+    // navigate("/");
   };
 
   return (
