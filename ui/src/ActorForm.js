@@ -1,38 +1,24 @@
 import {useState} from "react";
 
-export default function ActorForm(props) {
+export default function ActorForm({ onActorSubmit }) {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
 
-    async function addActor(event) {
+    function handleSubmit(event) {
         event.preventDefault();
         if (name.length < 1) {
-            return alert('Imię jest za krótkie');
+            return alert('Name is too short');
         }
         if (surname.length < 1) {
-            return alert('Nazwisko jest za krótkie');
+            return alert('Surname is too short');
         }
-        try {
-            const response = await fetch('/actors', {
-                method: 'POST',
-                body: JSON.stringify({name, surname}),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            if (response.ok) {
-                const actor = await response.json();
-                props.onActorSubmit(actor);
-                setName('');
-                setSurname('');
-            } else {
-                alert('Błąd podczas dodawania aktora');
-            }
-        } catch (error) {
-            alert('Błąd sieci: ' + error.message);
-        }
+        onActorSubmit({name, surname});
+        setName('');
+        setSurname('');
     }
 
     return (
-        <form onSubmit={addActor}>
+        <form onSubmit={handleSubmit}>
             <h2>Add Actors</h2>
             <div>
                 <label>Name</label>
